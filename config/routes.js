@@ -1,24 +1,27 @@
 var express = require('express');
 var Router = express.Router();
-var Controllers = require('../controllers');
+var Questions = require('../controllers/QuestionController');
+var Answers = require('../controllers/AnswerController');
+var IpAddress = require('../controllers/IpAddressController');
+var Index = require('../controllers/IndexController');
 /*
  * --- HTML Routes ---
  */
-Router.get('/', Controllers.index.loadIndex);
+Router.get('/', Index.loadIndex);
 
 /*
  * --- API Routes ---
  */
 
-Router.get('/api/questions', Controllers.questions.list);
-Router.get('/api/avaliableQuestions', Controllers.questions.getAvaliableQuestions);
+Router.get('/api/questions', Questions.list);
+Router.get('/api/avaliableQuestions', Questions.getAvaliableQuestions);
 
-Router.post('/api/questions', Controllers.questions.create);
-Router.post('/api/questions/ipAddress/', Controllers.ipAddress.create);
+Router.post('/api/questions', Questions.create);
+Router.post('/api/questions/ipAddress/', IpAddress.create);
 // Router.post('/api/questions/:questionId/answer', Controllers.answers.create);
 
-Router.put('/api/questions/updateAnswer', Controllers.answers.updateCount);
+Router.put('/api/questions/updateAnswer', Answers.updateCount);
 
-Router.delete('/api/questions/', Controllers.questions.deleteQuestion);
+Router.delete('/api/questions/', Questions.deleteQuestion);
 
 module.exports = Router;

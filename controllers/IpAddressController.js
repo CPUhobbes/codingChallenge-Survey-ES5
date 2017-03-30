@@ -4,7 +4,7 @@ var Answer = require('../models').Answer;
 Question.hasMany(Answer, IpAddress, { onDelete: 'cascade' });
 
 module.exports = {
-	create(req, res) {
+	create: function (req, res) {
 		// Get IP Address of Client
 		var ipAddr = req.headers['x-forwarded-for'] ||
 			req.connection.remoteAddress ||

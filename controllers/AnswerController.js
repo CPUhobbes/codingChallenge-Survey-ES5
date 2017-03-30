@@ -1,7 +1,7 @@
 var Answer = require('../models').Answer;
 
 module.exports = {
-	create(req, res) {
+	create: function (req, res) {
 		return Answer
 			.create({
 				answer: req.body.answer,
@@ -14,7 +14,7 @@ module.exports = {
 				res.status(400).send(error);
 			});
 	},
-	updateCount(req, res) {
+	updateCount: function (req, res) {
 		return Answer
 			.findById(req.body.answerId)
 			.then(function (answer) {

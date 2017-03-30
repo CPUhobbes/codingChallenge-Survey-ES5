@@ -7,7 +7,7 @@ var sequelize = require('sequelize');
 
 module.exports = {
 	// Create a new question
-	create(req, res) {
+	create: function (req, res) {
 		// console.log(req.body.answers);
 		return Question
 			.create({
@@ -34,7 +34,7 @@ module.exports = {
 	},
 
 	// Get all Questions
-	list(req, res) {
+	list: function (req, res) {
 		return Question
 			.findAll({
 				include: [{
@@ -55,7 +55,7 @@ module.exports = {
 	},
 
 	// Find one question that does not match current IP Address
-	getAvaliableQuestions(req, res) {
+	getAvaliableQuestions: function (req, res) {
 		// Get IP Address of Client
 		var ipAddr = req.headers ['x-forwarded-for'] ||
 			req.connection.remoteAddress ||
@@ -104,7 +104,7 @@ module.exports = {
 			});
 	},
 
-	deleteQuestion(req, res) {
+	deleteQuestion: function (req, res) {
 		// console.log(req.body.questionId);
 		return Question
 			.find({
