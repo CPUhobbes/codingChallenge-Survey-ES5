@@ -33547,7 +33547,7 @@
 			// this.setState({login:this.props.adminLogIn()});
 
 			Utils.getQuestion().then(function (data) {
-				if (typeof data.question !== 'undefined') {
+				if (typeof data[0].question !== 'undefined') {
 					var newObj = {
 						question: data[0].question,
 						answers: data[0].answers,
@@ -33556,14 +33556,7 @@
 					};
 					this.setState({ survey: newObj });
 				}
-			}.bind(this)).catch(function () {
-				var newObj = {
-					question: '',
-					answers: [],
-					id: ''
-				};
-				this.setState({ survey: newObj });
-			});
+			}.bind(this)).catch(function () {});
 		},
 
 		handleFormSubmit: function handleFormSubmit(event) {
