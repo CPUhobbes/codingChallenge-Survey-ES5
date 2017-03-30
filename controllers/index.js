@@ -4,8 +4,8 @@ var answers = require('./AnswerController');
 var ipAddress = require('./IpAddressController');
 
 module.exports = {
-  index,
-  questions,
-  answers,
-  ipAddress
+	index,
+	questions,
+	answers,
+	ipAddress
 };

@@ -1,5 +1,5 @@
 module.exports = {
-  up: function(queryInterface, Sequelize){
+	up: function (queryInterface, Sequelize) {
 		return queryInterface.createTable('Answers', {
 			id: {
 				allowNull: false,
@@ -9,19 +9,19 @@ module.exports = {
 			},
 			answer: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: false
 			},
 			responses: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
+				allowNull: false
 			},
 			createdAt: {
-				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			updatedAt: {
-				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			questionId: {
 				type: Sequelize.INTEGER,
@@ -29,12 +29,12 @@ module.exports = {
 				references: {
 					model: 'Questions',
 					key: 'id',
-					as: 'questionId',
-				},
+					as: 'questionId'
+				}
 			}
 		});
-  },
-  down: function(queryInterface, Sequelize){
-	return queryInterface.dropTable('Answers');
-  }
+	},
+	down: function (queryInterface) {
+		return queryInterface.dropTable('Answers');
+	}
 };

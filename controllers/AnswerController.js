@@ -5,29 +5,30 @@ module.exports = {
 		return Answer
 			.create({
 				answer: req.body.answer,
-                questionId: req.params.questionId
+				questionId: req.params.questionId
 			})
-			.then(function(answer){res.status(201).send(answer)}
-			)
-			.catch(function(error){
-				res.status(400).send(error)
+			.then(function (answer) {
+				res.status(201).send(answer);
+			})
+			.catch(function (error) {
+				res.status(400).send(error);
 			});
 	},
-	updateCount(req, res){
+	updateCount(req, res) {
 		return Answer
 			.findById(req.body.answerId)
-			.then(function(answer){
+			.then(function (answer) {
 				var newCount = answer.dataValues.responses + 1;
-				answer.update({responses:newCount})
-				.then(function(){
-					res.status(201).send(answer)
+				answer.update({responses: newCount})
+				.then(function () {
+					res.status(201).send(answer);
 				})
-				.catch(function(error){
-					res.status(400).send(error)
-				});			
+				.catch(function (error) {
+					res.status(400).send(error);
+				});
 			})
-			.catch(function(error){
-				res.status(400).send(error)
+			.catch(function (error) {
+				res.status(400).send(error);
 			});
 	}
 };

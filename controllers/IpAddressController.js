@@ -5,22 +5,21 @@ Question.hasMany(Answer, IpAddress, { onDelete: 'cascade' });
 
 module.exports = {
 	create(req, res) {
-		
-		//Get IP Address of Client
-		var ipAddr = req.headers['x-forwarded-for'] || 
-			req.connection.remoteAddress || 
+		// Get IP Address of Client
+		var ipAddr = req.headers['x-forwarded-for'] ||
+			req.connection.remoteAddress ||
 			req.socket.remoteAddress ||
 			req.connection.socket.remoteAddress;
 		return IpAddress
 			.create({
 				ip: ipAddr,
-                questionId: req.body.data.questionId
+				questionId: req.body.data.questionId
 			})
-			.then(function(ip){
-				res.status(201).send(ip)
+			.then(function (ip) {
+				res.status(201).send(ip);
 			})
-			.catch(function(error){
-				res.status(400).send(error)
+			.catch(function (error) {
+				res.status(400).send(error);
 			});
-	},
+	}
 };

@@ -1,6 +1,6 @@
-var express = require('express'),
-    Router = express.Router(),
-    Controllers = require('../controllers');
+var express = require('express');
+var Router = express.Router();
+var Controllers = require('../controllers');
 /*
  * --- HTML Routes ---
  */
@@ -15,7 +15,7 @@ Router.get('/api/avaliableQuestions', Controllers.questions.getAvaliableQuestion
 
 Router.post('/api/questions', Controllers.questions.create);
 Router.post('/api/questions/ipAddress/', Controllers.ipAddress.create);
-//Router.post('/api/questions/:questionId/answer', Controllers.answers.create);
+// Router.post('/api/questions/:questionId/answer', Controllers.answers.create);
 
 Router.put('/api/questions/updateAnswer', Controllers.answers.updateCount);
 

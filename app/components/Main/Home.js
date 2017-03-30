@@ -1,85 +1,79 @@
-//Import Packages
-
-var React = require('react'),
-	Row = require('react-bootstrap/lib/Row'),
-	Col = require('react-bootstrap/lib/Col'),
-	Grid = require('react-bootstrap/lib/Grid'),
-	Form = require('react-bootstrap/lib/Form'),
-	Radio = require('react-bootstrap/lib/Radio'),
-	Button = require('react-bootstrap/lib/Button'),
-	Jumbotron = require('react-bootstrap/lib/Jumbotron'),
-	hashHistory = require('react-router/lib/hashHistory'),
-	Utils = require('../Utils/utils');
+// Import Packages
+var React = require('react');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Grid = require('react-bootstrap/lib/Grid');
+var Form = require('react-bootstrap/lib/Form');
+var Radio = require('react-bootstrap/lib/Radio');
+var Button = require('react-bootstrap/lib/Button');
+var Jumbotron = require('react-bootstrap/lib/Jumbotron');
+var hashHistory = require('react-router/lib/hashHistory');
+var Utils = require('../Utils/utils');
 
 var Home = React.createClass({
-	getInitialState: function (){
+	getInitialState: function () {
 		return {
-			survey:{
-				question:'',
-				answers:[],
-				id:''
+			survey: {
+				question: '',
+				answers: [],
+				id: ''
 			},
-			selection:-1,
-		}
+			selection: -1
+		};
 	},
-	
-	componentDidMount: function (){
-		//this.setState({login:this.props.adminLogIn()});
 
-		Utils.getQuestion().then(function (data){
+	componentWillMount: function () {
+		// this.setState({login:this.props.adminLogIn()});
+
+		Utils.getQuestion().then(function (data) {
 			let newObj = {
-				question:data[0].question,
-				answers:data[0].answers,
-				id:data[0].id
+				question: data[0].question,
+				answers: data[0].answers,
+				id: data[0].id
 
-			}
-			this.setState({survey:newObj});
+			};
+			this.setState({survey: newObj});
 		}.bind(this))
-		.catch(function(error){
+		.catch(function () {
 			let newObj = {
-					question:'',
-					answers:[],
-					id:''
-
-			}
-			this.setState({survey:newObj});
-		})
-		
+				question: '',
+				answers: [],
+				id: ''
+			};
+			this.setState({survey: newObj});
+		});
 	},
-	
-	handleFormSubmit: function (event){
+
+	handleFormSubmit: function (event) {
 		event.preventDefault();
-		
-		if(this.state.selection>0){
-			Utils.submitAnswer(this.state.selection).then(function (){
-				
-				Utils.updateIp(this.state.survey.id).then(function(response){
-					if(response.status === 201){
+		if (this.state.selection > 0) {
+			Utils.submitAnswer(this.state.selection).then(function () {
+				Utils.updateIp(this.state.survey.id).then(function (response) {
+					if (response.status === 201) {
 						hashHistory.push('/ThankYou');
-					}
-					else{
+					} else {
 						hashHistory.push('/Error');
 					}
-				})
-			})
+				});
+			});
 		}
 	},
-	
-	handleFormChange: function (event){
+
+	handleFormChange: function (event) {
 		// console.log(this.state);
 		this.setState({selection: parseInt(event.target.id, 10)});
 	},
 
-	render: function (){
-		//functions
+	render: function () {
+		// functions
 		var handleFormChange = this.handleFormChange;
 		var handleFormSubmit = this.handleFormSubmit;
 
-		//variables
+		// variables
 		var question = this.state.survey.question;
 		var answers = this.state.survey.answers;
-		
-		function noQuestions(){
+
+		function noQuestions() {
 			return (
 				<div>
 					<Col sm={12}>
@@ -92,7 +86,7 @@ var Home = React.createClass({
 			);
 		}
 
-		function showQuestions(){
+		function showQuestions() {
 			return (
 				<div>
 					<Col sm={12}>
@@ -105,13 +99,13 @@ var Home = React.createClass({
 									<h3 key={index}>
 										<Radio  id={val.id} name="radioGroup">
 											{val.answer}
-											{/*<p> {val.answer} --- {val.responses} --- {val.id} </p>*/}
+											{/* <p> {val.answer} --- {val.responses} --- {val.id} </p> */}
 										</Radio>
-									</h3> 
-								)
+									</h3>
+								);
 							})}
 							<div className="text-center">
-								<Button type='submit' bsStyle='primary' bsSize="lg"> Submit </Button>
+								<Button type="submit" bsStyle="primary" bsSize="lg"> Submit </Button>
 							</div>
 						</Form>
 					</Col>
@@ -119,17 +113,15 @@ var Home = React.createClass({
 			);
 		}
 
-		//Conditional Rendering if there are questions avaliable
-		function displaySurvey(){
-			if(question === ''){
-				
-				return <div>{noQuestions()}</div>
-			}
-			else{
-				return <div>{showQuestions()}</div>
+		// Conditional Rendering if there are questions avaliable
+		function displaySurvey() {
+			if (question === '') {
+				return (<div> {noQuestions()} </div>);
+			} else {
+				return (<div> {showQuestions()} </div>);
 			}
 		}
-	
+
 		return (
 			<div>
 				<Grid>
@@ -139,7 +131,7 @@ var Home = React.createClass({
 					</Row>
 					</Jumbotron>
 				</Grid>
-      		</div>
+			</div>
 		);
 	}
 });

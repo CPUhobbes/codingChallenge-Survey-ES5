@@ -1,0 +1,12 @@
+{
+    "extends": "eslint-config-airbnb-es5",
+    "rules": {
+        "indent": ["error", "tab"],
+        "func-names": ["error", "never"]
+    },
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ]
+}

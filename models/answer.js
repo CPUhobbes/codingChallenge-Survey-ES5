@@ -1,26 +1,23 @@
-module.exports = (sequelize, DataTypes) => {
-  const Answer = sequelize.define('Answer', {
+module.exports = function (sequelize, DataTypes) {
+	var Answer = sequelize.define('Answer', {
 		answer: {
-			type:DataTypes.STRING,
-			allowNull: false,
+			type: DataTypes.STRING,
+			allowNull: false
 		},
-		responses:{
+		responses: {
 			type: DataTypes.INTEGER,
-			allowNull:false
+			allowNull: false
 		}
-	
-  }, 
-	{
+	}, {
 		classMethods: {
 			// associations can be defined here
-			associate:(models) =>{
-				Answer.belongsTo(models.Question,{
-					foreignKey:'questionId',
-					onDelete: 'CASCADE',
-				})
-				
+			associate: function (models) {
+				Answer.belongsTo(models.Question, {
+					foreignKey: 'questionId',
+					onDelete: 'CASCADE'
+				});
 			}
 		}
-  });
-  return Answer;
+	});
+	return Answer;
 };
