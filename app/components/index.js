@@ -40,7 +40,7 @@ var Index = React.createClass({
 			adminCred: {user: 'admin', pass: 'pass'}
 		};
 	},
-	componentWillUpdate: function (prevProps, prevState) {
+	componentDidUpdate: function (prevProps, prevState) {
 		// Check to see if password message needs updating
 		if (prevState.failedLogin !== this.state.failedLogin) {
 			if (this.state.failedLogin) {
@@ -58,7 +58,6 @@ var Index = React.createClass({
 	loginSubmitHandler: function (event) {
 		event.preventDefault();
 		this.setState({failedLogin: true});
-
 		if (this.state.user === this.state.adminCred.user && this.state.pass === this.state.adminCred.pass) {
 			hashHistory.push({
 				pathname: '/Admin',
@@ -85,6 +84,7 @@ var Index = React.createClass({
 	},
 
 	render: function () {
+		var currentState = this.state;
 		return (
 			<div>
 				<h5 className="text-right"><a href="#" onClick={this.triggerModal}> Admin Log In </a></h5>
@@ -109,7 +109,7 @@ var Index = React.createClass({
 
 						<div className="text-center">
 							<FormGroup validationState="error">
-								<HelpBlock><h2>{this.state.message}</h2></HelpBlock>
+								<HelpBlock><h2>{currentState.message}</h2></HelpBlock>
 							</FormGroup>
 						</div>
 						<Row>

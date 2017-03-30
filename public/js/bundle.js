@@ -26630,7 +26630,7 @@
 				adminCred: { user: 'admin', pass: 'pass' }
 			};
 		},
-		componentWillUpdate: function componentWillUpdate(prevProps, prevState) {
+		componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
 			// Check to see if password message needs updating
 			if (prevState.failedLogin !== this.state.failedLogin) {
 				if (this.state.failedLogin) {
@@ -26648,7 +26648,6 @@
 		loginSubmitHandler: function loginSubmitHandler(event) {
 			event.preventDefault();
 			this.setState({ failedLogin: true });
-
 			if (this.state.user === this.state.adminCred.user && this.state.pass === this.state.adminCred.pass) {
 				hashHistory.push({
 					pathname: '/Admin',
@@ -26675,6 +26674,7 @@
 		},
 
 		render: function render() {
+			var currentState = this.state;
 			return React.createElement(
 				'div',
 				null,
@@ -26747,7 +26747,7 @@
 										React.createElement(
 											'h2',
 											null,
-											this.state.message
+											currentState.message
 										)
 									)
 								)
@@ -33547,13 +33547,15 @@
 			// this.setState({login:this.props.adminLogIn()});
 
 			Utils.getQuestion().then(function (data) {
-				var newObj = {
-					question: data[0].question,
-					answers: data[0].answers,
-					id: data[0].id
+				if (typeof data.question !== 'undefined') {
+					var newObj = {
+						question: data[0].question,
+						answers: data[0].answers,
+						id: data[0].id
 
-				};
-				this.setState({ survey: newObj });
+					};
+					this.setState({ survey: newObj });
+				}
 			}.bind(this)).catch(function () {
 				var newObj = {
 					question: '',
@@ -33569,7 +33571,7 @@
 			var currentState = this.state;
 			if (this.state.selection > 0) {
 				Utils.submitAnswer(currentState.selection).then(function () {
-					Utils.updateIp(this.state.survey.id).then(function (response) {
+					Utils.updateIp(currentState.survey.id).then(function (response) {
 						if (response.status === 201) {
 							hashHistory.push('/ThankYou');
 						} else {

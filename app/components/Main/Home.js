@@ -26,16 +26,18 @@ var Home = React.createClass({
 		// this.setState({login:this.props.adminLogIn()});
 
 		Utils.getQuestion().then(function (data) {
-			let newObj = {
-				question: data[0].question,
-				answers: data[0].answers,
-				id: data[0].id
+			if (typeof data.question !== 'undefined') {
+				var newObj = {
+					question: data[0].question,
+					answers: data[0].answers,
+					id: data[0].id
 
-			};
-			this.setState({survey: newObj});
+				};
+				this.setState({survey: newObj});
+			}
 		}.bind(this))
 		.catch(function () {
-			let newObj = {
+			var newObj = {
 				question: '',
 				answers: [],
 				id: ''
@@ -49,7 +51,7 @@ var Home = React.createClass({
 		var currentState = this.state;
 		if (this.state.selection > 0) {
 			Utils.submitAnswer(currentState.selection).then(function () {
-				Utils.updateIp(this.state.survey.id).then(function (response) {
+				Utils.updateIp(currentState.survey.id).then(function (response) {
 					if (response.status === 201) {
 						hashHistory.push('/ThankYou');
 					} else {
