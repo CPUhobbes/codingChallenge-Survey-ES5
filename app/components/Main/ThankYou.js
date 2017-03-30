@@ -1,26 +1,33 @@
-//Import Packages
-import React, { Component } from 'react';
-import { Row, Col, Grid, Button} from 'react-bootstrap';
-import {hashHistory} from 'react-router';
+// Import Packages
+var React = require('react');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Grid = require('react-bootstrap/lib/Grid');
+var Button = require('react-bootstrap/lib/Button');
+var hashHistory = require('react-router/lib/hashHistory');
 
-class ThankYou extends Component{
-	constructor(props) {
-		super(props);
+var ThankYou = React.createClass({
+	propTypes: {
 
-		this.state = {
+	},
+
+	getDefaultProps() {
+		return {
 
 		};
+	},
 
-		//Bind functions here
-		this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  	}
-	
-	handleFormSubmit(event){
+	getInitialState: function () {
+		return {
+
+		};
+	},
+
+	handleFormSubmit: function () {
 		hashHistory.push('/');
-	}
+	},
 
-	render(){
-		
+	render: function () {
 		return (
 			<div>
 				<Grid>
@@ -29,14 +36,14 @@ class ThankYou extends Component{
 							<h2 className="text-center">Thank You For Your Submission!</h2>
 							<br /><br />
 							<div className="text-center">
-								<Button onClick={this.handleFormSubmit} bsStyle='primary' bsSize="lg"> Try Another Question </Button>
+								<Button onClick={this.handleFormSubmit} bsStyle="primary" bsSize="lg"> Try Another Question </Button>
 							</div>
 						</Col>
 					</Row>
 				</Grid>
-      		</div>
+			</div>
 		);
 	}
-}
+});
 
-export default ThankYou;
+module.exports = ThankYou;

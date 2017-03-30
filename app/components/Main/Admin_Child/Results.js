@@ -1,41 +1,39 @@
-//Import Packages
-var React = require('react'),
-	Row = require('react-bootstrap/lib/Row'),
-	Col = require('react-bootstrap/lib/Col'),
-	Grid = require('react-bootstrap/lib/Grid'),
-	Jumbotron = require('react-bootstrap/lib/Jumbotron'),
-	Utils = require('../../Utils/utils');
+// Import Packages
+var React = require('react');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Grid = require('react-bootstrap/lib/Grid');
+var Jumbotron = require('react-bootstrap/lib/Jumbotron');
+var Utils = require('../../Utils/utils');
 
 
 var Results =  React.createClass({
 
-	getInitialState: function (){
+	getInitialState: function () {
 		return {
-			results:{}
-		}
+			results: {}
+		};
 	},
-	
-	componentWillMount: function(){
+
+	componentWillMount: function () {
 		Utils.getResults()
-			.then( function (results){
-				if(results.status === 200){
-					this.setState({results:results.data});
+			.then( function (results) {
+				if (results.status === 200) {
+					this.setState({results: results.data});
 				}
-
 			}.bind(this))
-		.catch(function (error){
-			console.log(error);
-			this.setState({results:{}});
-		})
+		.catch(function () {
+			// console.log(error);
+			this.setState({results: {}});
+		});
 	},
 
-	render: function(){
-
+	render: function () {
 		var results = this.state.results;
-		function displayResults(){
+		function displayResults() {
 			return (
 				<div className="questionResults">
-					{results.map(function(questions, indexQuest){
+					{results.map(function (questions, indexQuest) {
 						return (
 							<div key={indexQuest}>
 								<Jumbotron className="questionBox">
@@ -44,8 +42,8 @@ var Results =  React.createClass({
 									<Col sm={1}> <div className="answerKey">Results</div></Col>
 								</Row>
 								<div className="answerList">
-									{questions.answers.map(function(answers, indexAns){
-										return(
+									{questions.answers.map(function (answers, indexAns) {
+										return (
 											<div key={indexAns}>
 												<Row>
 													<Col sm={8}> {answers.answer}</Col>
@@ -60,30 +58,28 @@ var Results =  React.createClass({
 						);
 					})}
 				</div>
-			)
+			);
 		}
 
-		function errorResults(){
+		function errorResults() {
 			return (
 				<div>
 					<h1 className="text-center">There Are No Questions</h1>
 					<h1 className="text-center"> Please Try Again Later!</h1>
 				</div>
-			)
+			);
 		}
 
-		//Conditional Rendering if there are questions avaliable
-		function getResults(){
-			if(results.length>0){
-				return <div>{displayResults()} </div>
-			}
-			else{
-				return <div>{errorResults()} </div>
+		// Conditional Rendering if there are questions avaliable
+		function getResults() {
+			if (results.length > 0) {
+				return (<div> {displayResults()} </div>);
+			} else {
+				return (<div> {errorResults()} </div>);
 			}
 		}
-		
+
 		return (
-			
 			<div>
 				<Grid>
 					<Row>
@@ -93,7 +89,7 @@ var Results =  React.createClass({
 						</Col>
 					</Row>
 				</Grid>
-      		</div>
+			</div>
 		);
 	}
 });

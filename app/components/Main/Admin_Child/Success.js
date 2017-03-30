@@ -1,26 +1,23 @@
-//Import Packages
-var React = require('react'),
-	Row = require('react-bootstrap/lib/Row'),
-	Col = require('react-bootstrap/lib/Col'),
-	Grid = require('react-bootstrap/lib/Grid'),
-	Form = require('react-bootstrap/lib/Form'),
-	Radio = require('react-bootstrap/lib/Radio'),
-	Button = require('react-bootstrap/lib/Button');
+// Import Packages
+var React = require('react');
+var Row = require('react-bootstrap/lib/Row');
+var Col = require('react-bootstrap/lib/Col');
+var Grid = require('react-bootstrap/lib/Grid');
 
 var Success = React.createClass({
 
-	propTypes:{
-		
+	propTypes: {
+
 	},
-	getDefaultProps(){
-		return{
-			
+
+	getDefaultProps() {
+		return {
+
 		};
 	},
 
-	render: function(){
+	render: function () {
 		return (
-			
 			<div>
 				<Grid>
 					<Row>
@@ -29,7 +26,7 @@ var Success = React.createClass({
 						</Col>
 					</Row>
 				</Grid>
-      		</div>
+			</div>
 		);
 	}
 });

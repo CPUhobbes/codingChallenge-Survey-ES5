@@ -1,4 +1,4 @@
-//Import Packages
+// Import Packages
 var React = require('react');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
@@ -14,61 +14,59 @@ var hashHistory = require('react-router/lib/hashHistory');
 
 var Delete = React.createClass({
 
-	getInitialState: function (){
+	getInitialState: function () {
 		return {
-			results:{},
-			status:[]
-		}
+			results: {},
+			status: []
+		};
 	},
-	
-	componentDidMount: function(){
-		Utils.getResults().then(function (results){
-			if(results.status === 200){
-				this.setState({results:results.data});
-				var tempArr = new Array(results.data.length)
+
+	componentDidMount: function () {
+		Utils.getResults().then(function (results) {
+			if (results.status === 200) {
+				this.setState({results: results.data});
+				var tempArr = new Array(results.data.length);
 				tempArr.fill(false);
-				this.setState({status: tempArr})
+				this.setState({status: tempArr});
 			}
-
 		}.bind(this))
-		.catch(function (error){
-			console.log(error);
-		})
+		.catch(function () {
+			// console.log(error);
+		});
 	},
 
-	handleFormSubmit: function (event){
+	handleFormSubmit: function (event) {
 		event.preventDefault();
-		this.state.status.forEach(function (val, index){
-			if(val){
-				 Utils.deleteQuestion(this.state.results[index].id).then(function (response){
-					if(response.status === 202){
+		this.state.status.forEach(function (val, index) {
+			if (val) {
+				Utils.deleteQuestion(this.state.results[index].id).then(function (response) {
+					if (response.status === 202) {
 						hashHistory.push('/Admin/Success');
-					}
-					else{
+					} else {
 						hashHistory.push('/Error');
 					}
-				 });
+				});
 			}
-		})
-	},
-	
-	handleFormChange: function (event){
-		var tempArr = this.state.status;
-		tempArr[parseInt(event.target.id,10)] = !tempArr[parseInt(event.target.id,10)];
-		this.setState({status:tempArr});
+		});
 	},
 
-	render: function(){
-		//variables
+	handleFormChange: function (event) {
+		var tempArr = this.state.status;
+		tempArr[parseInt(event.target.id, 10)] = !tempArr[parseInt(event.target.id, 10)];
+		this.setState({status: tempArr});
+	},
+
+	render: function () {
+		// variables
 		var results = this.state.results;
 
-		function questions(){
+		function showQuestions() {
 			return (
 				<div>
 					<FormGroup>
-					{results.map(function(questions, indexQuest) {
+					{results.map(function (questions, indexQuest) {
 						return (
-							<h3 key={indexQuest}> 
+							<h3 key={indexQuest}>
 								<Checkbox id={indexQuest.toString()} >
 									{questions.question}
 								</Checkbox>
@@ -77,28 +75,26 @@ var Delete = React.createClass({
 					})}
 					</FormGroup>
 				</div>
-			)
+			);
 		}
 
-		function errorResults(){
+		function errorResults() {
 			return (
 				<div>
 					<h1 className="text-center">There Are No Questions </h1>
 					<h1 className="text-center"> Please Try Again Later!</h1>
 				</div>
-			)
+			);
 		}
 
-		//Conditional Rendering if there are questions avaliable
-		function getQuestions(){
-			if(results.length>0){
-				return <div>{questions()} </div>
-			}
-			else{
-				return <div>{errorResults()} </div>
+		// Conditional Rendering if there are questions avaliable
+		function getQuestions() {
+			if (results.length > 0) {
+				return (<div>{showQuestions()} </div>);
+			} else {
+				return (<div>{errorResults()} </div>);
 			}
 		}
-
 		return (
 			<div>
 				<Grid>
@@ -110,7 +106,7 @@ var Delete = React.createClass({
 									<Jumbotron>
 										<div>{getQuestions()} </div>
 										<div className="text-center buttonMargin">
-											<Button type='submit' bsStyle='primary' bsSize='lg'> Submit </Button>
+											<Button type="submit" bsStyle="primary" bsSize="lg"> Submit </Button>
 										</div>
 									</Jumbotron>
 								</Form>
@@ -118,7 +114,7 @@ var Delete = React.createClass({
 						</Col>
 					</Row>
 				</Grid>
-      		</div>
+			</div>
 		);
 	}
 });

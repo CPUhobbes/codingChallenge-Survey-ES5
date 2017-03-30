@@ -17,7 +17,7 @@ var hashHistory = require('react-router/lib/hashHistory');
 var Index = React.createClass({
 
 	propTypes: {
-		children: React.PropTypes.string.isRequired
+		children: React.PropTypes.object.isRequired
 	},
 
 	getDefaultProps() {
