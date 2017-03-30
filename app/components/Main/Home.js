@@ -46,8 +46,9 @@ var Home = React.createClass({
 
 	handleFormSubmit: function (event) {
 		event.preventDefault();
+		var currentState = this.state;
 		if (this.state.selection > 0) {
-			Utils.submitAnswer(this.state.selection).then(function () {
+			Utils.submitAnswer(currentState.selection).then(function () {
 				Utils.updateIp(this.state.survey.id).then(function (response) {
 					if (response.status === 201) {
 						hashHistory.push('/ThankYou');
@@ -117,9 +118,8 @@ var Home = React.createClass({
 		function displaySurvey() {
 			if (question === '') {
 				return (<div> {noQuestions()} </div>);
-			} else {
-				return (<div> {showQuestions()} </div>);
 			}
+			return (<div> {showQuestions()} </div>);
 		}
 
 		return (

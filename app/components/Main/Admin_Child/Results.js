@@ -74,9 +74,8 @@ var Results =  React.createClass({
 		function getResults() {
 			if (results.length > 0) {
 				return (<div> {displayResults()} </div>);
-			} else {
-				return (<div> {errorResults()} </div>);
 			}
+			return (<div> {errorResults()} </div>);
 		}
 
 		return (

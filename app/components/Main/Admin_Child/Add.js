@@ -3,16 +3,16 @@ var React = require('react');
 var Row = require('react-bootstrap/lib/Row');
 var Col = require('react-bootstrap/lib/Col');
 var Grid = require('react-bootstrap/lib/Grid');
-var Form = require('react-bootstrap/lib/Nav');
-var FormControl = require('react-bootstrap/lib/Navbar');
-var FormGroup = require('react-bootstrap/lib/NavItem');
+var Form = require('react-bootstrap/lib/Form');
+var FormControl = require('react-bootstrap/lib/FormControl');
+var FormGroup = require('react-bootstrap/lib/FormGroup');
 var Button = require('react-bootstrap/lib/Button');
-var ControlLabel = require('react-router-bootstrap/lib/IndexLinkContainer');
-var Jumbotron = require('react-router-bootstrap/lib/IndexLinkContainer');
+var ControlLabel = require('react-bootstrap/lib/ControlLabel');
+var Jumbotron = require('react-bootstrap/lib/Jumbotron');
 var hashHistory = require('react-router/lib/hashHistory');
-var Utils = require('../Utils/utils');
+var Utils = require('../../Utils/utils');
 
-var Add = React.className({
+var Add = React.createClass({
 
 	propTypes: {
 
@@ -73,6 +73,8 @@ var Add = React.className({
 	},
 
 	render: function () {
+		var addAnAnswer = this.addAnswer;
+
 		return (
 			<div>
 				<Grid>
@@ -95,7 +97,7 @@ var Add = React.className({
 											})}
 										</FormGroup>
 									</div>
-									<Button bsStyle="primary" onClick={function () {this.addAnswer();}}>
+									<Button bsStyle="primary" onClick={function () {addAnAnswer();}}>
 										Add Another Answer
 									</Button>
 									<div className="text-center buttonMargin">

@@ -28,7 +28,7 @@ module.exports = (
 		<Route path="/" component={Index} >
 			<IndexRoute component={Home} />
 		</Route>
-			{/* <Route path ="/ThankYou" component={ThankYou} />
+			<Route path ="/ThankYou" component={ThankYou} />
 			<Route path ="/Error" component={SubmitError} />
 		<Route path="/Admin" component={Admin} >
 			<IndexRoute component={AdminResults} />
@@ -36,6 +36,6 @@ module.exports = (
 			<Route path ="/Admin/Delete" component={AdminDelete} />
 			<Route path ="/Admin/Success" component={AdminSuccess} />
 		</Route>
-		<Route path="*" component={NotFound} /> */}
+		<Route path="*" component={NotFound} />
 	</Router>
 );

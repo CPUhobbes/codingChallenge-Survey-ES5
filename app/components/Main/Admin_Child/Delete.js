@@ -37,9 +37,10 @@ var Delete = React.createClass({
 
 	handleFormSubmit: function (event) {
 		event.preventDefault();
+		var deleteState = this.state;
 		this.state.status.forEach(function (val, index) {
 			if (val) {
-				Utils.deleteQuestion(this.state.results[index].id).then(function (response) {
+				Utils.deleteQuestion(deleteState.results[index].id).then(function (response) {
 					if (response.status === 202) {
 						hashHistory.push('/Admin/Success');
 					} else {
@@ -91,9 +92,8 @@ var Delete = React.createClass({
 		function getQuestions() {
 			if (results.length > 0) {
 				return (<div>{showQuestions()} </div>);
-			} else {
-				return (<div>{errorResults()} </div>);
 			}
+			return (<div>{errorResults()} </div>);
 		}
 		return (
 			<div>

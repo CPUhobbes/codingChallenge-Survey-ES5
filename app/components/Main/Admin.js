@@ -98,9 +98,8 @@ var Admin = React.createClass({
 		function checkLogin() {
 			if (login) {
 				return (<div>{showAdmin()}</div>);
-			} else {
-				return (<div>{showError()}</div>);
 			}
+			return (<div>{showError()}</div>);
 		}
 
 		return (
