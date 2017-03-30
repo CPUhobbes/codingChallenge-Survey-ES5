@@ -13,7 +13,7 @@ https://frozen-meadow-21427.herokuapp.com/
 ## Instructions:
 1. Clone Repository
 2. Run npm install
-3. Change MySQL login info in the sequelize.json file
+3. Change MySQL login info in the sequelize.json file ('/config/sequelize.json)
 4. Add Schema to database using 'db.sql' file
     * Ex. mysql -u root -p < /PATH/TO/DB/FILE.sql
     * If there is an issue, create a database called "survey" in MySQL
